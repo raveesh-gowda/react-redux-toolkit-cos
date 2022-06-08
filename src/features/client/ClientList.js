@@ -31,7 +31,7 @@ const ClientList = (props) => {
 			asyncAllClients(pageNumber);
 		} else{
 			setPageNumber(0)
-			asyncAllClients(pageNumber)
+			// asyncAllClients(pageNumber)
 		}
 	};
 

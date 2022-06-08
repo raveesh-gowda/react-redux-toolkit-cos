@@ -1,18 +1,18 @@
 import {Link, Route, withRouter} from "react-router-dom";
 import {useDispatch} from "react-redux";
 
-import Login from "./features/user/Login";
-import UserDashboard from "./features/user/UserDashboard";
-import {logout} from "./features/user/userServices";
-import PrivateRouter from "./features/private/PrivateRouter";
-import AdminList from "./features/admin/AdminList";
-import AdminForm from "./features/admin/AdminForm";
-import AdminView from "./features/admin/AdminView";
-import AdminEdit from "./features/admin/AdminEdit";
-import ClientView from "./features/client/ClientView";
-import ClientList from "./features/client/ClientList";
-import ClientForm from "./features/client/ClientForm";
-import ClientEdit from "./features/client/ClientEdit";
+import Login from "./user/Login";
+import UserDashboard from "./user/UserDashboard";
+import {logout} from "./user/userServices";
+import PrivateRouter from "./private/PrivateRouter";
+import AdminList from "./admin/AdminList";
+import AdminForm from "./admin/AdminForm";
+import AdminView from "./admin/AdminView";
+import AdminEdit from "./admin/AdminEdit";
+import ClientView from "./client/ClientView";
+import ClientList from "./client/ClientList";
+import ClientForm from "./client/ClientForm";
+import ClientEdit from "./client/ClientEdit";
 
 const NavBar = (props) => {
 	const {handleAuth, userLoggedIn} = props;

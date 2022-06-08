@@ -1,7 +1,6 @@
 import {useEffect, useState} from "react";
-import {useDispatch} from "react-redux";
 
-import NavBar from "./NavBar";
+import NavBar from "./features/NavBar";
 
 const App = (props) => {
 	const [userLoggedIn, setUserLoggedIn] = useState(false);
@@ -10,13 +9,11 @@ const App = (props) => {
 		setUserLoggedIn(!userLoggedIn);
 	};
 
-	const dispatch = useDispatch();
-
 	useEffect(() => {
 		if (localStorage.getItem("token")) {
 			handleAuth();
 		}
-	}, [dispatch]);
+	}, []);
 
 	return (
 		<div>
