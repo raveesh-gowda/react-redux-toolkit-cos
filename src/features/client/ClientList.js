@@ -9,9 +9,10 @@ import {
 	asyncDeleteClient,
 	asyncClientByName,
 } from "./clientServices";
+import {resetData} from "./clientSlice";
 
 const ClientList = (props) => {
-	const {data, hasNext} = useSelector((state) => state.client);
+	const {data, hasNext, searchData} = useSelector((state) => state.client);
 	// console.log(data);
 
 	const [term, setTerm] = useState("");
@@ -20,18 +21,17 @@ const ClientList = (props) => {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		if (hasNext) {
-			dispatch(asyncAllClients(pageNumber));
-		}
-	}, [dispatch, pageNumber, hasNext]);
+		dispatch(resetData());
+	}, [dispatch]);
+
+	useEffect(() => {
+		dispatch(asyncAllClients(pageNumber));
+	}, [dispatch, pageNumber]);
 
 	const fetchData = () => {
 		if (hasNext) {
 			setPageNumber(pageNumber + 1);
 			asyncAllClients(pageNumber);
-		} else {
-			setPageNumber(0);
-			asyncAllClients(pageNumber)
 		}
 	};
 
@@ -58,7 +58,9 @@ const ClientList = (props) => {
 	const handleChange = (e) => {
 		const res = e.target.value;
 		setTerm(res);
-		dispatch(asyncClientByName(res.toLowerCase()));
+		if (term.length > 0) {
+			dispatch(asyncClientByName(res.toLowerCase()));
+		}
 	};
 
 	return (
@@ -90,7 +92,7 @@ const ClientList = (props) => {
 						<p className="lead text-center">No more records...</p>
 					}
 				>
-					{data.map((ele) => {
+					{(term.length > 0 ? searchData : data).map((ele) => {
 						return (
 							<div
 								key={ele.id}

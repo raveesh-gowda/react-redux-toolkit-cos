@@ -34,7 +34,7 @@ export const asyncAdminByName = createAsyncThunk(
 	async (value) => {
 		try {
 			const res = await axios.get(
-				`${process.env.REACT_APP_BASE_URL}/admins?page=0&limit=10&name=${value}`,
+				`${process.env.REACT_APP_BASE_URL}/admins?name=${value}`,
 				{
 					headers: {
 						Authorization: localStorage.getItem("token"),

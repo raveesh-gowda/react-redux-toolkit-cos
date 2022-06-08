@@ -9,9 +9,10 @@ import {
 	asyncAllAdmins,
 	asyncDeleteAdmin,
 } from "./adminServices";
+import {resetData} from "./adminSlice";
 
 const AdminList = (props) => {
-	const {data, hasNext} = useSelector((state) => state.admin);
+	const {data, hasNext, searchData} = useSelector((state) => state.admin);
 	// console.log(data);
 
 	const [term, setTerm] = useState("");
@@ -19,18 +20,25 @@ const AdminList = (props) => {
 
 	const dispatch = useDispatch();
 
-	useEffect(() => {
-		if (hasNext) {
-			dispatch(asyncAllAdmins(pageNumber));
+	const handleChange = (e) => {
+		const input = e.target.value;
+		setTerm(input);
+		if (term.length > 0) {
+			dispatch(asyncAdminByName(input.toLowerCase()));
 		}
-	}, [dispatch, pageNumber, hasNext]);
+	};
+
+	useEffect(() => {
+		dispatch(resetData());
+	}, [dispatch]);
+
+	useEffect(() => {
+		dispatch(asyncAllAdmins(pageNumber));
+	}, [dispatch, pageNumber]);
 
 	const fetchData = () => {
 		if (hasNext) {
 			setPageNumber(pageNumber + 1);
-			asyncAllAdmins(pageNumber);
-		} else {
-			setPageNumber(0);
 			asyncAllAdmins(pageNumber);
 		}
 	};
@@ -53,12 +61,6 @@ const AdminList = (props) => {
 				swal("Customer data is safe!", "", "info");
 			}
 		});
-	};
-
-	const handleChange = (e) => {
-		const res = e.target.value;
-		setTerm(res);
-		dispatch(asyncAdminByName(res.toLowerCase()));
 	};
 
 	return (
@@ -90,7 +92,7 @@ const AdminList = (props) => {
 						<p className="lead text-center">No more records...</p>
 					}
 				>
-					{data.map((ele) => {
+					{(term.length > 0 ? searchData : data).map((ele) => {
 						return (
 							<div
 								className="container card bg-primary bg-opacity-25 mt-2"

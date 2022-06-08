@@ -11,6 +11,7 @@ import {
 const initialState = {
 	loading: false,
 	data: [],
+	searchData: [],
 	errors: null,
 	hasNext: true,
 };
@@ -18,7 +19,11 @@ const initialState = {
 const adminSlice = createSlice({
 	name: "admin",
 	initialState,
-	reducers: {},
+	reducers: {
+		resetData: (state) => {
+			state.data = [];
+		},
+	},
 	extraReducers: {
 		[asyncAllAdmins.pending]: (state) => {
 			state.loading = true;
@@ -34,7 +39,7 @@ const adminSlice = createSlice({
 			state.errors = action.payload.message;
 		},
 		[asyncAdminByName.fulfilled]: (state, action) => {
-			state.data = action.payload.data;
+			state.searchData = action.payload.data;
 		},
 		[asyncAdminByName.rejected]: (state, action) => {
 			state.errors = action.payload.message;
@@ -71,5 +76,7 @@ const adminSlice = createSlice({
 		},
 	},
 });
+
+export const {resetData} = adminSlice.actions;
 
 export default adminSlice.reducer;

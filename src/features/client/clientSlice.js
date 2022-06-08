@@ -11,6 +11,7 @@ import {
 const initialState = {
 	loading: false,
 	data: [],
+	searchData:[],
 	hasNext: true,
 	errors: null,
 };
@@ -18,7 +19,11 @@ const initialState = {
 const clientSlice = createSlice({
 	name: "client",
 	initialState,
-	reducers: {},
+	reducers: {
+		resetData: (state) => {
+			state.data = [];
+		},
+	},
 	extraReducers: {
 		[asyncAllClients.pending]: (state) => {
 			state.loading = true;
@@ -35,7 +40,7 @@ const clientSlice = createSlice({
 			state.errors = action.payload.message;
 		},
 		[asyncClientByName.fulfilled]: (state, action) => {
-			state.data = action.payload.data;
+			state.searchData = action.payload.data;
 		},
 		[asyncClientByName.rejected]: (state, action) => {
 			state.errors = action.payload.message;
@@ -72,5 +77,7 @@ const clientSlice = createSlice({
 		},
 	},
 });
+
+export const {resetData} = clientSlice.actions;
 
 export default clientSlice.reducer;

@@ -34,7 +34,7 @@ export const asyncClientByName = createAsyncThunk(
 	async (value) => {
 		try {
 			const res = await axios.get(
-				`${process.env.REACT_APP_BASE_URL}/clients?page=0&limit=10&name=${value}`,
+				`${process.env.REACT_APP_BASE_URL}/clients?name=${value}`,
 				{
 					headers: {
 						Authorization: localStorage.getItem("token"),
@@ -93,7 +93,7 @@ export const asyncCreateClient = createAsyncThunk(
 			onSubmitProps.resetForm();
 			props.history.push("/dashboard/client");
 			swal({
-				title: "Created admin successfully!!",
+				title: "Created client successfully!!",
 				icon: "success",
 				button: "OK",
 			});
@@ -119,7 +119,7 @@ export const asyncEditClient = createAsyncThunk(
 				{headers: {Authorization: localStorage.getItem("token")}}
 			);
 			swal({
-				title: "Updated admin successfully!!",
+				title: "Updated client successfully!!",
 				icon: "success",
 				button: "OK",
 			});
