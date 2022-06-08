@@ -31,7 +31,7 @@ const AdminList = (props) => {
 			asyncAllAdmins(pageNumber);
 		} else {
 			setPageNumber(0);
-			// asyncAllAdmins(pageNumber);
+			asyncAllAdmins(pageNumber);
 		}
 	};
 

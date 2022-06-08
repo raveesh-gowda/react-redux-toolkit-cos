@@ -11,7 +11,7 @@ import {
 } from "./clientServices";
 
 const ClientList = (props) => {
-	const {data,  hasNext} = useSelector((state) => state.client);
+	const {data, hasNext} = useSelector((state) => state.client);
 	// console.log(data);
 
 	const [term, setTerm] = useState("");
@@ -20,7 +20,7 @@ const ClientList = (props) => {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		if(hasNext){
+		if (hasNext) {
 			dispatch(asyncAllClients(pageNumber));
 		}
 	}, [dispatch, pageNumber, hasNext]);
@@ -29,9 +29,9 @@ const ClientList = (props) => {
 		if (hasNext) {
 			setPageNumber(pageNumber + 1);
 			asyncAllClients(pageNumber);
-		} else{
-			setPageNumber(0)
-			// asyncAllClients(pageNumber)
+		} else {
+			setPageNumber(0);
+			asyncAllClients(pageNumber)
 		}
 	};
 
@@ -98,7 +98,7 @@ const ClientList = (props) => {
 							>
 								<h5>
 									<Link
-										to={`/dashboard/admin/id/${ele.id}`}
+										to={`/dashboard/client/id/${ele.id}`}
 										className="nav nav-link text-dark text-center"
 									>
 										{ele.firstName} {ele.lastName}

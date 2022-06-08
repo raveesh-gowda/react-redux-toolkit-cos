@@ -114,7 +114,7 @@ const ClientView = (props) => {
 					</h5>
 					<h5>
 						Insurance Company Name:{" "}
-						{oneData.insurance.name.length === 0
+						{oneData.insurance === null
 							? "---"
 							: `${oneData.insurance.name}`}{" "}
 					</h5>
