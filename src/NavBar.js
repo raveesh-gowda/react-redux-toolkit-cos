@@ -3,6 +3,7 @@ import {useDispatch} from "react-redux";
 
 import Login from "./features/user/Login";
 import UserDashboard from "./features/user/UserDashboard";
+import {logout} from "./features/user/userServices";
 import PrivateRouter from "./features/private/PrivateRouter";
 import AdminList from "./features/admin/AdminList";
 import AdminForm from "./features/admin/AdminForm";
@@ -10,7 +11,6 @@ import AdminView from "./features/admin/AdminView";
 import AdminEdit from "./features/admin/AdminEdit";
 import ClientView from "./features/client/ClientView";
 import ClientList from "./features/client/ClientList";
-import {logout} from "./features/user/userSlice";
 import ClientForm from "./features/client/ClientForm";
 import ClientEdit from "./features/client/ClientEdit";
 

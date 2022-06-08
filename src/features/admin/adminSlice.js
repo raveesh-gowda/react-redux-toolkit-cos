@@ -1,6 +1,12 @@
-import {createSlice, createAsyncThunk} from "@reduxjs/toolkit";
-import swal from "sweetalert";
-import axios from "axios";
+import {createSlice} from "@reduxjs/toolkit";
+
+import {
+	asyncAllAdmins,
+	asyncAdminByName,
+	asyncCreateAdmin,
+	asyncDeleteAdmin,
+	asyncEditAdmin,
+} from "./adminServices";
 
 const initialState = {
 	loading: false,
@@ -8,139 +14,6 @@ const initialState = {
 	errors: null,
 	hasNext: true,
 };
-
-//All Admins
-export const asyncAllAdmins = createAsyncThunk(
-	"all/admins",
-	async (pageNumber) => {
-		try {
-			const res = await axios.get(
-				`http://23.21.204.21:8080/api/v1/admins?page=${
-					pageNumber ? pageNumber : 0
-				}&limit=10`,
-				{
-					headers: {
-						Authorization: localStorage.getItem("token"),
-					},
-				}
-			);
-			console.log(res.data);
-			return res.data;
-		} catch (err) {
-			swal({
-				title: `${err.response.data.message}`,
-				icon: "error",
-				button: "OK",
-			});
-		}
-	}
-);
-
-//Search admin by name
-export const asyncAdminByName = createAsyncThunk(
-	"byName/admins",
-	async (value) => {
-		try {
-			const res = await axios.get(
-				`http://23.21.204.21:8080/api/v1/admins?page=0&limit=10&name=${value}`,
-				{
-					headers: {
-						Authorization: localStorage.getItem("token"),
-					},
-				}
-			);
-			// console.log(res.data)
-			return res.data;
-		} catch (err) {
-			swal({
-				title: `${err.response.data.message}`,
-				icon: "error",
-				button: "OK",
-			});
-		}
-	}
-);
-
-//Create Admin
-export const asyncCreateAdmin = createAsyncThunk(
-	"create/admins",
-	async (values) => {
-		const {formValues, onSubmitProps, props} = values;
-		try {
-			const res = await axios.post(
-				"http://23.21.204.21:8080/api/v1/admins",
-				formValues,
-				{
-					headers: {
-						Authorization: localStorage.getItem("token"),
-					},
-				}
-			);
-			onSubmitProps.resetForm();
-			props.history.push("/dashboard/admin");
-			swal({
-				title: "Created admin successfully!!",
-				icon: "success",
-				button: "OK",
-			});
-			return res;
-		} catch (err) {
-			swal({
-				title: `${err.response.data.message}`,
-				icon: "error",
-				button: "OK",
-			});
-		}
-	}
-);
-
-//Delete Admin
-export const asyncDeleteAdmin = createAsyncThunk(
-	"delete/admins",
-	async (id) => {
-		try {
-			await axios.delete(`http://23.21.204.21:8080/api/v1/admins/${id}`, {
-				headers: {
-					Authorization: localStorage.getItem("token"),
-				},
-			});
-			return id;
-			// console.log(res);
-		} catch (err) {
-			swal({
-				title: `${err.response.data.message}`,
-				icon: "error",
-				button: "OK",
-			});
-		}
-	}
-);
-
-//Edit Admin
-export const asyncEditAdmin = createAsyncThunk(
-	"edit/admins",
-	async (formValues) => {
-		try {
-			await axios.put(
-				`http://23.21.204.21:8080/api/v1/admins/${formValues.id}`,
-				formValues,
-				{headers: {Authorization: localStorage.getItem("token")}}
-			);
-			swal({
-				title: "Updated admin successfully!!",
-				icon: "success",
-				button: "OK",
-			});
-			return formValues;
-		} catch (err) {
-			swal({
-				title: `${err.response.data.message}`,
-				icon: "error",
-				button: "OK",
-			});
-		}
-	}
-);
 
 const adminSlice = createSlice({
 	name: "admin",

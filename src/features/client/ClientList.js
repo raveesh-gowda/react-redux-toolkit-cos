@@ -8,7 +8,7 @@ import {
 	asyncAllClients,
 	asyncDeleteClient,
 	asyncClientByName,
-} from "./clientSlice";
+} from "./clientServices";
 
 const ClientList = (props) => {
 	const {data,  hasNext} = useSelector((state) => state.client);

@@ -4,7 +4,11 @@ import {useDispatch, useSelector} from "react-redux";
 import {Link} from "react-router-dom";
 import swal from "sweetalert";
 
-import {asyncAdminByName, asyncAllAdmins, asyncDeleteAdmin} from "./adminSlice";
+import {
+	asyncAdminByName,
+	asyncAllAdmins,
+	asyncDeleteAdmin,
+} from "./adminServices";
 
 const AdminList = (props) => {
 	const {data, hasNext} = useSelector((state) => state.admin);

@@ -2,7 +2,7 @@ import {Formik, Field, Form, ErrorMessage} from "formik";
 import * as Yup from "yup";
 import {useDispatch} from "react-redux";
 
-import {asyncCreateAdmin} from "./adminSlice";
+import {asyncCreateAdmin} from "./adminServices";
 import {Link} from "react-router-dom";
 
 const AdminForm = (props) => {

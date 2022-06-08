@@ -2,7 +2,7 @@ import {Formik, Field, Form, ErrorMessage} from "formik";
 import * as Yup from "yup";
 import {Link} from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { asyncCreateClient } from "./clientSlice";
+import { asyncCreateClient } from "./clientServices";
 
 const ClientForm = (props) => {
 	const initialValues = {

@@ -6,7 +6,7 @@ import {useDispatch} from "react-redux";
 import axios from "axios";
 import swal from "sweetalert";
 
-import {asyncEditAdmin} from "./adminSlice";
+import {asyncEditAdmin} from "./adminServices";
 
 const AdminEdit = (props) => {
 	const {id} = props.match.params;
@@ -15,7 +15,7 @@ const AdminEdit = (props) => {
 
 	useEffect(() => {
 		axios
-			.get(`http://23.21.204.21:8080/api/v1/admins/${id}`, {
+			.get(`${process.env.REACT_APP_BASE_URL}/admins/${id}`, {
 				headers: {Authorization: localStorage.getItem("token")},
 			})
 			.then((response) => {
